@@ -47,7 +47,7 @@ while (<FP>)
   if (defined $conversion{$contigCols[1]}
      && defined $taxIds{ $conversion{$contigCols[1]} })
    {
-     print "$header\n$seq$separator$qual" ;
+     print "@"."$header\n$seq$separator$qual" ;
      ++$count ;
      last if ($count >= $n) ;
    }
