@@ -1,3 +1,7 @@
+## Folders
+sim: scripts regarding generating simulated data
+SRA: scripts regarding obtaining data sets from SRA
+
 ## Running commands
 ### Build index
 Kraken2:
