@@ -40,6 +40,15 @@ foreach my $tid (keys %taxTree)
   {
     $taxToSpecies{$tid} = $tid ;
   }
+
+  # the SRA don't have the species-level information,
+  #   so we ignore this sample
+  # though this test is redundant by the implementation, but we add it here for clarity.
+  if ($taxRank{$tid} eq "genus")
+  {
+    next ;
+  }
+  
   my $p = $taxTree{$tid} ;
   while ($p != 1)
   {
