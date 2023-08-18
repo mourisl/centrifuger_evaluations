@@ -1,6 +1,7 @@
 #!/bin/perl
 
 # Select the SRA from runinfo file with representative tax id
+# output: SRA taxid species/genus_taxid
 
 use strict ;
 use warnings ;
@@ -86,6 +87,8 @@ while (<FP>)
     next if (!defined $taxToSpecies{$taxId} 
         || !defined $effectiveTax{ $taxToSpecies{$taxId}}) ;
     next if (defined $used{$taxToSpecies{$taxId}}) ;
+    print $cols[0]."\t".$taxId."\t".$taxToSpecies{$taxId}."\n" ;
+    $used{$taxToSpecies{$taxId}} = 1 ;
   }
   else
   {
@@ -96,19 +99,12 @@ while (<FP>)
     next if (!defined $taxToGenus{$taxId} 
         || !defined $effectiveTax{ $taxToGenus{$taxId}}) ;
     next if (defined $used{$taxToGenus{$taxId}}) ;
-  }
-  
-  print $cols[0]."\n" ;
-  ++$selected ;
-  
-  if ($inSpecies == 1)
-  {
-    $used{$taxToSpecies{$taxId}} = 1 ;
-  }
-  else
-  {
+
+    print $cols[0]."\t".$taxId."\t".$taxToGenus{$taxId}."\n" ;
     $used{$taxToGenus{$taxId}} = 1 ;
   }
+  
+  ++$selected ;
   last if ($selected >= $n) ;
 }
 close FP ;
