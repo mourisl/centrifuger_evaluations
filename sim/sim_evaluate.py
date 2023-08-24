@@ -92,7 +92,8 @@ def compare_scm(class_out, true_out, taxonomy_tree, rank, options):
           break
         
         tax_id = parent_tax_id
-    if rank_tax_id == "":
+    if rank_tax_id == "": # Don't evaluate the case that the taxonomy id is not in the tree.
+      #unclassified += 1
       continue
     if read_name not in db_dic:
       unclassified += 1
@@ -142,7 +143,7 @@ def evaluate(predictFile, truthFile, taxonomyFile, ranks, options):
                "order"   : [0, 0, 0],
                "class"   : [0, 0, 0],
                "phylum"  : [0, 0, 0]}
-
+  print("rank\ttrue\tpredicted\tcases\t\tsensitivity\tprecision\tuniq_true\tuniq_pred\tuniq_sensitivity\tuniq_precision")
   for rank in ranks:
     classified, unique_classified, unclassified, raw_classified, raw_unique_classified = \
         compare_scm(predict, truth, taxonomyTree, rank, options)
@@ -150,12 +151,22 @@ def evaluate(predictFile, truthFile, taxonomyFile, ranks, options):
     num_cases = classified + unclassified
     # if rank == "strain":
     #    assert num_cases == num_fragment
+    print("{:}\t{:}\t{:}\t{:}\t{:.4}\t{:.4}\t{:}\t{:}\t{:.4}\t{:.4}".format(
+        rank,
+        classified, raw_classified, num_cases, 
+        classified / num_cases, classified / raw_classified,
+        unique_classified, raw_unique_classified, 
+        unique_classified / num_cases, unique_classified / raw_unique_classified
+        ))
+    
+    """
     print("\t\t%s" % rank)
     print("\t\t\tsensitivity: {:,} / {:,} ({:.2%})".format(classified, num_cases, float(classified) / num_cases))
     print("\t\t\tprecision  : {:,} / {:,} ({:.2%})".format(classified, raw_classified, float(classified) / raw_classified))
     print("\n\t\t\tfor uniquely classified ")
     print("\t\t\t\t\tsensitivity: {:,} / {:,} ({:.2%})".format(unique_classified, num_cases, float(unique_classified) / num_cases))
     print("\t\t\t\t\tprecision  : {:,} / {:,} ({:.2%})".format(unique_classified, raw_unique_classified, float(unique_classified) / raw_unique_classified))
+    """
 
 if (__name__ == "__main__"):
   rank_list_default = "strain,species,genus,family,order,class,phylum"
