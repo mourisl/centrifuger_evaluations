@@ -143,7 +143,7 @@ def evaluate(predictFile, truthFile, taxonomyFile, ranks, options):
                "order"   : [0, 0, 0],
                "class"   : [0, 0, 0],
                "phylum"  : [0, 0, 0]}
-  print("rank\ttrue\tpredicted\tcases\t\tsensitivity\tprecision\tuniq_true\tuniq_pred\tuniq_sensitivity\tuniq_precision")
+  print("rank\ttrue\tpredicted\tcases\tsensitivity\tprecision\tuniq_true\tuniq_pred\tuniq_sensitivity\tuniq_precision")
   for rank in ranks:
     classified, unique_classified, unclassified, raw_classified, raw_unique_classified = \
         compare_scm(predict, truth, taxonomyTree, rank, options)
