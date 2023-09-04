@@ -29,15 +29,18 @@ while (<FP>)
   my @cols = split ;
   my $sra = $cols[0] ;
   my $taxId = $cols[1] ;
-  while ($taxId != 1 && $taxRank{$taxId} ne $targetRank)
+  if ($targetRank ne "strand")
   {
-    $taxId = $taxTree{$taxId} ;
+    while ($taxId != 1 && $taxRank{$taxId} ne $targetRank)
+    {
+      $taxId = $taxTree{$taxId} ;
+    }
   }
   if ($taxId == 1)
   {
-    print "WRONG: $sra tax id is not in the tree."
+    print "WRONG: $sra tax id is not in the tree.\n" ;
   }
-  
+
   $sraTax{$sra} = $taxId ;
 }
 close FP ;
@@ -46,7 +49,14 @@ close FP ;
 my $prefix = $ARGV[3] ;
 foreach my $sra (keys %sraTax)
 {
-  open FP, "zcat $prefix$sra.tsv.gz |" ;
+  if (-e "$prefix$sra.tsv.gz")
+  {
+    open FP, "zcat $prefix$sra.tsv.gz |" ;
+  }
+  else
+  {
+    open FP, "$prefix$sra.tsv" ;
+  }
   my $P = 0;
   my $T = 0 ;
   my $TP = 0 ;
@@ -56,14 +66,19 @@ foreach my $sra (keys %sraTax)
     chomp ;
     my $line = $_ ;
     my @cols = split /\t/, $line ;
-    my $taxId = $cols[2] ; 
-    while ($taxId > 1 && $taxRank{$taxId} ne $targetRank)
+    my $taxId = $cols[2] ;
+    
+    if ($targetRank ne "strand")
     {
-      $taxId = $taxTree{$taxId} ;
+      while ($taxId > 1 && defined $taxRank{$taxId} 
+        && $taxRank{$taxId} ne $targetRank)
+      {
+        $taxId = $taxTree{$taxId} ;
+      }
     }
 
     ++$TP if ($taxId == $sraTax{$sra}) ;
-    ++$P if (!($line =~ /^C\t/ || $line =~ /unclassified/)) ;
+    ++$P if (!($line =~ /^U\t/ || $line =~ /unclassified/)) ;
     ++$T ;
   }
   close FP ;
