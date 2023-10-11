@@ -1,0 +1,5 @@
+/dartfs/rc/lab/S/SongL/projects/compactds/r-index/build/CMakeFiles/rebuild_cache.dir
+/dartfs/rc/lab/S/SongL/projects/compactds/r-index/build/CMakeFiles/ri-build.dir
+/dartfs/rc/lab/S/SongL/projects/compactds/r-index/build/CMakeFiles/ri-count.dir
+/dartfs/rc/lab/S/SongL/projects/compactds/r-index/build/CMakeFiles/ri-locate.dir
+/dartfs/rc/lab/S/SongL/projects/compactds/r-index/build/CMakeFiles/edit_cache.dir

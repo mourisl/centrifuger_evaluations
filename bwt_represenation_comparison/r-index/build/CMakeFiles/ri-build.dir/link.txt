@@ -1,0 +1,1 @@
+/usr/bin/c++  --std=c++11 -g -ggdb -Ofast -fstrict-aliasing -DNDEBUG -march=native  -rdynamic CMakeFiles/ri-build.dir/ri-build.cpp.o  -o ri-build  -L/dartfs-hpc/rc/home/y/f006q7y/lib -Wl,-rpath,/dartfs-hpc/rc/home/y/f006q7y/lib -lsdsl -ldivsufsort -ldivsufsort64 
