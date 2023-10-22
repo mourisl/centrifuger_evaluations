@@ -15,7 +15,7 @@ perl GetTruthTable.pl p_sim_1M_1.fq p_seqid.map > sim_truth.out
 ```
 
 3. Run classifier
-Centrifuger: centrifuger-class -t 8 -x cfr_p -1 $r1 -2 $r2 > cfr_class.out
+Centrifuger: centrifuger -t 8 -x cfr_p -1 $r1 -2 $r2 > cfr_class.out
 
 Centrifuge:
 ```
