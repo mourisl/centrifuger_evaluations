@@ -2,6 +2,7 @@
 - bwt_represenation_comparison: scripts for evaluting wavelet tree, RLBWT, hybrid run-length compression and RBBWT. 
 - sim: scripts regarding generating simulated data
 - SRA: scripts regarding obtaining data sets from SRA
+- plot: scripts for drawing the plots 
 
 ## Running commands
 ### Build index
