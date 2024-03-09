@@ -15,6 +15,7 @@ perl GetTruthTable.pl p_sim_1M_1.fq p_seqid.map > sim_truth.out
 ```
 
 3. Run classifier
+
 Centrifuger: centrifuger -t 8 -x cfr_p -1 $r1 -2 $r2 > cfr_class.out
 
 Centrifuge:
@@ -39,3 +40,12 @@ zcat reads_mapping.tsv.gz | grep -v "^#" | awk 'NR%2==1' | cut -f1,3 | sed "s/\/
 ```
 
 The running command and the evaluation procedure is the same as the evaluation for Mason-generated simulated data.
+
+
+### Centrifuger reassign
+```
+centrifuger -t 8 -x cfr_p -1 $r1 -2 $r2 -k 5 > cfr_class.out
+centrifuger-kreport -x cfr_p cfr_class.out > cfr_kreport.out
+../other_scripts/centrifuger-reassign cfr_p cfr_class.out cfr_kreport.out > cfr_reassign.out
+
+```
